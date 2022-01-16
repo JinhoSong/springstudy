@@ -1,7 +1,6 @@
-package com.display.springstudy.model;
+package com.display.springstudy.live.model;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 public class PostDto {

@@ -1,8 +1,8 @@
-package com.display.springstudy.serviceImpl;
+package com.display.springstudy.live.serviceImpl;
 
-import com.display.springstudy.model.PostDto;
-import com.display.springstudy.repository.PostRepository;
-import com.display.springstudy.service.PostService;
+import com.display.springstudy.live.model.PostDto;
+import com.display.springstudy.live.repository.PostRepository;
+import com.display.springstudy.live.service.PostService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

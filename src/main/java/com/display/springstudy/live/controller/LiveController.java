@@ -1,7 +1,7 @@
-package com.display.springstudy.controller;
+package com.display.springstudy.live.controller;
 
-import com.display.springstudy.model.PostDto;
-import com.display.springstudy.service.PostService;
+import com.display.springstudy.live.model.PostDto;
+import com.display.springstudy.live.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
