@@ -7,9 +7,11 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-@Slf4j
 public class SpringstudyApplication extends SpringBootServletInitializer {
 
+    /**
+     * war packing 이후 톰캣에서 자동 배포되려면 SpringBootServletInitializer를 상속받아 configure를 구현해놔야 한다.
+     */
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(SpringstudyApplication.class);

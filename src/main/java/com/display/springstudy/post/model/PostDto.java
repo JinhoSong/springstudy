@@ -1,4 +1,4 @@
-package com.display.springstudy.live.model;
+package com.display.springstudy.post.model;
 
 import lombok.AllArgsConstructor;
 

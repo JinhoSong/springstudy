@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layouts/live/liveLayout}">
+
+<div layout:fragment="content">
+    <h1>content</h1>
+</div>
+
+
+
+
+<script layout:fragment="testScript">
+    console.log("override");
+</script>
+
+</html>

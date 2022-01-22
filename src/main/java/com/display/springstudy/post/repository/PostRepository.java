@@ -1,6 +1,6 @@
-package com.display.springstudy.live.repository;
+package com.display.springstudy.post.repository;
 
-import com.display.springstudy.live.model.PostDto;
+import com.display.springstudy.post.model.PostDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

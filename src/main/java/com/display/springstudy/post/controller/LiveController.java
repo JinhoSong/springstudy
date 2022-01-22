@@ -1,7 +1,7 @@
-package com.display.springstudy.live.controller;
+package com.display.springstudy.post.controller;
 
-import com.display.springstudy.live.model.PostDto;
-import com.display.springstudy.live.service.PostService;
+import com.display.springstudy.post.model.PostDto;
+import com.display.springstudy.post.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +19,11 @@ public class LiveController {
         this.postService = postService;
     }
 
-    @GetMapping("/admin")
+    @GetMapping("/main")
     public String liveAdmin(Model model) {
         List<PostDto> postDtoList = postService.getAllPost();
         model.addAttribute("posts",postDtoList);
-        return "liveList";
+        return "live/liveMain";
     }
 
 }
