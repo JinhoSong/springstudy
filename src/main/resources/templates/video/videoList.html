@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layouts/layout/defaultLayout}">
+<body>
+<div layout:fragment="content">
+    <div class="container">
+    <form class="form-inline">
+        <input id="videoNm" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="search()">Search</button>
+    </form>
+    <div id="videoListContainer">
+        <th:block th:if="${videoPageInfo != null}">
+            <table class="table table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">USER ID</th>
+                    <th scope="col">POST ID</th>
+                    <th scope="col">POST TITLE</th>
+                    <th scope="col">POST CONTENT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="video : ${videoPageInfo.list}">
+                    <td th:text="${video.detailsCd}">no</td>
+                    <td th:text="${video.videoCd}">title</td>
+                    <td th:text="${video.videoNm}">title</td>
+                    <td th:text="${video.poster}">title</td>
+                </tbody>
+            </table>
+            <th:block th:replace="~{fragments/pagenation :: info(${videoPageInfo})}">
+
+            </th:block>
+        </th:block>
+    </div>
+</div>
+</div>
+<th:block layout:fragment="scriptPage">
+    <script th:inline="javascript">
+
+        function search() {
+            var videoCriteria = {
+                videoNm: $('#videoNm').val(),
+                pageNum: 1,
+                pageSize: 2
+            }
+            getVideoList(videoCriteria);
+        }
+
+        function goPage(pageNum) {
+            var videoCriteria = {
+                pageNum: pageNum,
+                pageSize: 2
+            }
+            getVideoList(videoCriteria);
+        }
+
+        function getVideoList(videoCriteria) {
+
+            console.log(videoCriteria);
+
+            $.ajax({
+                url: "/videoList",
+                data: videoCriteria,
+                type: "GET"
+            }).done(function (data) {
+                $('#videoListContainer').replaceWith(data);
+            })
+        }
+    </script>
+</th:block>
+</body>
+</html>

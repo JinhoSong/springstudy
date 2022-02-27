@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="sidebarFragment">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- List group -->
+        <div class="list-group" id="myList">
+            <button type="button" class="list-group-item bg-dark"  style="border: none" href="#home">Home</button>
+        </div>
+        <div class="list-group" id="menuList" role="tablist">
+            <a class="list-group-item list-group-item-action active bg-dark" data-toggle="list" href="#home" role="tab">sss</a>
+            <a class="list-group-item list-group-item-action bg-dark" data-toggle="list" href="#profile" role="tab">Profile</a>
+            <a class="list-group-item list-group-item-action bg-dark" data-toggle="list" href="#messages" role="tab">Messages</a>
+            <a class="list-group-item list-group-item-action bg-dark" data-toggle="list" href="#settings" role="tab">Settings</a>
+        </div>
+    </ul>
+    <!-- End of Sidebar -->
+
+</th:block>
+
+</html>
