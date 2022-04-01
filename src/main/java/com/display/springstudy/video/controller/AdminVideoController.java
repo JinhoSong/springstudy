@@ -30,9 +30,8 @@ public class AdminVideoController {
 
         return "video/admin/insert";
     }
-
     @RequestMapping("/actor")
-    public String getActor(@RequestParam("actorNm") String actorNm, Model model){
+    public String getActor(@RequestParam("actorNm") String actorNm, Model model) {
 
         List<Actor> actorList = actorService.getActor(actorNm);
 
@@ -40,5 +39,8 @@ public class AdminVideoController {
 
         return "video/admin/insert :: #actorListContainer";
     }
-
+    @RequestMapping("test")
+    public String test(){
+        return "";
+    }
 }
