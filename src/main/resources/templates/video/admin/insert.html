@@ -7,28 +7,155 @@
     <div class="container">
         <form>
             <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <label for="videoInput">비디오</label>
+                <input type="file" class="form-control" id="videoInput" onchange="changeVideo()">
+                <video id="video" controls="controls">
+                    <source src="http://0.s3.envato.com/h264-video-previews/80fad324-9db4-11e3-bf3d-0050569255a8/490527.mp4"
+                            type="video/mp4">
+                </video>
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label for="videoNm">비디오 명</label>
+                <input type="text" class="form-control" id="videoNm" aria-describedby="emailHelp">
             </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            <div class="form-group">
+                <label for="poster">포스터 이미지</label>
+                <input type="file" class="form-control" id="poster">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+
+            <select id="category" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <option selected>카테고리를 선택하시오</option>
+                <div th:each="category : ${categoryList}">
+                    <div th:each="details : ${category.categoryDetails}">
+                        <option th:text="${details.detailsNm}" th:value="${details.detailsNm}"></option>
+                    </div>
+                </div>
+            </select>
+
+            <div class="form-group">
+                <label for="openingDate">개봉일자</label>
+                <input type="date" class="form-control" id="openingDate">
+            </div>
+            <div class="form-group">
+                <label for="score">점수</label>
+                <input type="number" class="form-control" id="score">
+            </div>
+            <div class="form-group">
+                <label for="summary">줄거리</label>
+                <textarea type="text" class="form-control" id="summary"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="actorNm">출연자 검색</label>
+                <input type="text" class="form-control" id="actorNm" onkeypress="enterEvent()">
+            </div>
+
+            <div id="castContainer">
+
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="dataSend()">Submit</button>
         </form>
 
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="actorListContainer">
+                            <div th:each="actor : ${actorList}">
+                                <div>
+                                    <a th:name="${actor.actorCd}" th:text="${actor.actorNm}" onclick="addActor(this.name,this.text)"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>
 <th:block layout:fragment="scriptPage">
     <script th:inline="javascript">
-        console.log('test');
-        console.log('1234');
+
+        function dataSend() {
+
+            var video = $('#video');
+
+            var videoInfoCriteria = {
+                detailsCd: $('#category option:selected').val(),
+                videoUrl: $('#video').val(),
+                videoNm: $('#videoNm').val(),
+                poster: $('#poster').val(),
+                playTime: $('#video').currentTime,
+                openingDate: $('#openingDate').val()
+
+            }
+
+            console.log(videoInfoCriteria);
+
+            $.ajax({
+                data: videoInfoCriteria,
+                url: '/rest/video',
+                type: 'POST'
+            })
+        }
+
+        function changeVideo() {
+            var videoUrl = $('#videoInput').val();
+            var videoSource = $('#videoSource');
+            videoSource.attr('src', videoUrl);
+        }
+
+        function enterEvent() {
+            if (window.event.keyCode === 13) {
+                this.getActor();
+
+            }
+        }
+
+        function getActor() {
+            var actorNm = $('#actorNm').val();
+            var modal = $('#exampleModalCenter');
+            modal.modal('show')
+
+            $.ajax({
+                url: '/admin/video/actor?actorNm='+actorNm,
+                type: 'GET',
+                success: function (data) {
+                    $('#actorListContainer').replaceWith(data);
+                }
+            })
+        }
+
+        function addActor(name,text){
+            console.log(name);
+            console.log(text);
+            // name으로 넘어온게 id다
+            var castContainer = $('#castContainer');
+            castContainer.append('<div>' +
+                '<a>'+text+'</a><input type="text" id="'+name+'"><button type="button" onclick="removeActor(this)">remove</button> </div>');
+
+            var modal = $('#exampleModalCenter');
+            modal.modal('hide')
+        }
+
+        function removeActor(object){
+            var castContainer = $('#castContainer');
+            object.remove()
+        }
+
     </script>
 </th:block>
 </body>

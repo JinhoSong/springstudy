@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.display.springstudy.category.repository.CategoryRepository">
+
+
+    <sql id="aliasColumns">
+        ${_alias}CAT_CD as catCd,
+        ${_alias}CAT_NM as catNm,
+        ${_alias}DETAILS_CD as detailsCd,
+        ${_alias}DETAILS_NM as detailsNm,
+    </sql>
+
+    <resultMap id="Category" type="com.display.springstudy.category.model.Category">
+        <id column="catCd" property="catCd"/>
+        <result column="catNm" property="catNm"/>
+        <collection property="categoryDetails" ofType="com.display.springstudy.category.model.CategoryDetails">
+            <id column="detailsCd" property="detailsCd"/>
+            <result column="detailsNm" property="detailsNm"/>
+        </collection>
+
+    </resultMap>
+
+    <select id="selectCategories" resultMap="Category">
+        SELECT ct.catCd as catCd, ct.catNm as catNm, ctd.detailsCd as detailsCd, ctd.detailsNm as detailsNm
+        FROM PSS.CATEGORY ct, PSS.CATEGORY_DETAIL ctd
+        where ct.catCd = ctd.catCd;
+    </select>
+
+
+</mapper>

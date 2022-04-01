@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.display.springstudy.actor.repository.ActorRepository">
+
+
+
+    <select id="selectActor" resultType="com.display.springstudy.actor.model.Actor">
+        select atr.actorCd as actorCd, atr.actorNm as actorNm, atr.image as image
+        FROM PSS.ACTOR atr
+        <where>
+            <if test="actorNm !='' and actorNm !=null">
+                AND atr.actorNm LIKE CONCAT('%',#{actorNm,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+    </select>
+
+</mapper>

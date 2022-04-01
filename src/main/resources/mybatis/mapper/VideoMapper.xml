@@ -17,4 +17,13 @@
             </if>
         </where>
     </select>
+
+    <insert id="insertVideo">
+        INSERT INTO PSS.VIDEO(detailsCd, videoCd, videoNm, poster, videoUrl)
+        VALUES (#{detailsCd,jdbcType=VARCHAR}
+            , #{videoNm,jdbcType=VARCHAR}
+            , #{poster,jdbcType=VARCHAR}
+            , #{videoUrl,jdbcType=VARCHAR}
+        )
+    </insert>
 </mapper>

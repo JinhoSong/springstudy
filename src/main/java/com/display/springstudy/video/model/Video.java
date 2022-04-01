@@ -11,5 +11,6 @@ public class Video {
     private String videoCd;
     private String videoNm;
     private String poster;
+    private String videoUrl;
 
 }
