@@ -15,4 +15,10 @@ public class AdminVideoController {
 
         return "video/admin/insert";
     }
+
+    @RequestMapping("test")
+    public String test(){
+        return "";
+    }
+
 }
