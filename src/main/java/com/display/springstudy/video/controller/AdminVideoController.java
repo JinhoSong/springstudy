@@ -21,8 +21,6 @@ public class AdminVideoController {
 
     private final ActorService actorService;
 
-
-    // test
     @RequestMapping("/insert")
     public String insertVideo(Model model){
 
@@ -41,4 +39,10 @@ public class AdminVideoController {
 
         return "video/admin/insert :: #actorListContainer";
     }
+    @RequestMapping("test")
+    public String test(@RequestParam("actorNm") String actorNm, Model model) {
+
+         return "";
+    }
+
 }
