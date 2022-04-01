@@ -39,8 +39,4 @@ public class AdminVideoController {
 
         return "video/admin/insert :: #actorListContainer";
     }
-    @RequestMapping("test")
-    public String test(){
-        return "";
-    }
 }
