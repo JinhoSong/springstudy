@@ -41,7 +41,6 @@ public class AdminVideoController {
     }
     @RequestMapping("test")
     public String test(@RequestParam("actorNm") String actorNm, Model model) {
-        System.out.println("222");
          return "";
     }
 
